@@ -1,0 +1,20 @@
+{
+  "name": "demo",
+  "version": "1.0.1",
+  "description": "Demo chaincode",
+  "main": "demo.js",
+  "scripts": {
+    "start": "node demo.js"
+  },
+  "keywords": [
+    "demo",
+    "chaincode",
+    "hyperledger",
+    "fabric"
+  ],
+  "author": "fsanti68",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "fabric-shim": "^1.4.0"
+  }
+}
