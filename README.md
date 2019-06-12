@@ -175,3 +175,11 @@ As instruções abaixo são específicas para _chaincodes_ em _Node.js_ e devem 
       $ CORE_CHAINCODE_ID_NAME="demo:1.0" node --inspect demo.js --peer.address localhost:7052
 
 Em seguida é possível depurar execuções pelo navegador, abrindo _chrome://inspect/devices_, selecionando o arquivo _demo.js_ e em seguida com Ctrl-P abrindo o _demo.js_. Nesta janela é possível incluir breakpoints e acompanhar a execução dos métodos.
+
+
+## Observações
+
+### Instâncias de Orderers, Kafka e ZooKeeper
+No exemplo acima, foi considerado um único orderer. Para ambientes produtivos isso não é recomendado, portanto devem ser criadas instâncias adicionais de orderers e os nós de comunicação (Kafka) e coordenaçao de cluster (zookeeper).
+
+Compare os arquivos de configuração com seus correspondentes _*-prod-sample.yaml_.

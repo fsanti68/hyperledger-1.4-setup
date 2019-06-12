@@ -52,7 +52,7 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.provider.company.com:7051
       - CORE_PEER_LOCALMSPID=ProviderMSP
     volumes:
-        - /var/run/:/host/var/run/        
+        - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/provider.company.com/peers/peer0.provider.company.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/provider.company.com/peers/peer0.provider.company.com/tls:/etc/hyperledger/fabric/tls
         - peer0.provider.company.com:/var/hyperledger/production
