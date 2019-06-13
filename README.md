@@ -62,32 +62,32 @@ Todos os artefatos são gerados no diretório network/channel-artifacts.
 
 Ao usar o container __cli__, o chaveamente entre um peer e outro é realizado pelas variáveis de ambiente:
 
-      $ echo $CORE_PEER_ADDRESS
-      $ echo $CORE_PEER_MSPCONFIGPATH
-      $ echo $CORE_PEER_LOCALMSPID
+      # echo $CORE_PEER_ADDRESS
+      # echo $CORE_PEER_MSPCONFIGPATH
+      # echo $CORE_PEER_LOCALMSPID
 
-      $ peer channel create -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/channel.tx
+      # peer channel create -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/channel.tx
 
 Adicionando o peer0 do Provider
 
-      $ peer channel join -b companychannel.block
+      # peer channel join -b companychannel.block
 
 Adicionando o peer1 do Provider
 
-      $ export CORE_PEER_ADDRESS=peer1.provider.company.com:7051
-      $ peer channel join -b companychannel.block
+      # export CORE_PEER_ADDRESS=peer1.provider.company.com:7051
+      # peer channel join -b companychannel.block
 
 Adicionando o peer0 do Consumer
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ConsumerMSP
-      $ peer channel join -b companychannel.block
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ConsumerMSP
+      # peer channel join -b companychannel.block
 
 ... e o peer1
 
-      $ export CORE_PEER_ADDRESS=peer1.consumer.company.com:7051
-      $ peer channel join -b companychannel.block
+      # export CORE_PEER_ADDRESS=peer1.consumer.company.com:7051
+      # peer channel join -b companychannel.block
 
 #### Peer âncora no canal
 
@@ -97,20 +97,20 @@ Este passo só é executado nos peers âncora (e não em todos). Neste caso, vam
 
 Seleciona o peer0 da organização 'Provider'
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ProviderMSP
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ProviderMSP
 
 Atualizando o canal para o _peer0.provider_:
 
-      $ peer channel update -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx
+      # peer channel update -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx
 
 Seleciona o _peer0_ da organização 'Consumer':
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ConsumerMSP
-      $ peer channel update -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ConsumerMSP
+      # peer channel update -o orderer.company.com:7050 -c companychannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx
 
 
 
@@ -124,31 +124,31 @@ Usando o smart contract de exemplo, _demo_, dentro do diretório _chaincode_. Es
 
 Instalando no _peer0_ do _Provider_ pelo __cli__:
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ProviderMSP
-      $ peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ProviderMSP
+      # peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
 
 Instalando no _peer1_:
 
-      $ export CORE_PEER_ADDRESS=peer1.provider.company.com:7051
-      $ peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
+      # export CORE_PEER_ADDRESS=peer1.provider.company.com:7051
+      # peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
 
 Instalando no _peer0_ do _Consumer_:
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ConsumerMSP
-      $ peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/consumer.company.com/users/Admin\@consumer.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.consumer.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ConsumerMSP
+      # peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
 
 E finalmente o _peer1_ do _Consumer_:
 
-      $ export CORE_PEER_ADDRESS=peer1.consumer.company.com:7051
-      $ peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
+      # export CORE_PEER_ADDRESS=peer1.consumer.company.com:7051
+      # peer chaincode install -n demo -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/demo
 
 Após instalar o chaincode em todos os peers, é necessário instancia-lo no canal, caso contrário, não estará disponível para uso:
 
-      $ peer chaincode instantiate -o orderer.company.com:7050 -C companychannel -l node -n demo -v 1.0 -c '{"Args":[]}'
+      # peer chaincode instantiate -o orderer.company.com:7050 -C companychannel -l node -n demo -v 1.0 -c '{"Args":[]}'
 
 Esta execução pode demorar um pouco.
 
@@ -156,15 +156,15 @@ Esta execução pode demorar um pouco.
 
 Uma vez instalado e instanciado o _chaincode_, é possível executar operações no _ledger_. Por exemplo, a partir do _peer0_ do _Provider_ podemos registrar um produto (_createEvent_):
 
-      $ export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
-      $ export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
-      $ export CORE_PEER_LOCALMSPID=ProviderMSP
+      # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/provider.company.com/users/Admin\@provider.company.com/msp/
+      # export CORE_PEER_ADDRESS=peer0.provider.company.com:7051
+      # export CORE_PEER_LOCALMSPID=ProviderMSP
 
-      $ peer chaincode invoke -n demo -c '{"Args":["1abf", "notification 1ABF", "2019-06-12T12:54:02.000"], "Function":"createEvent"}' -C companychannel
+      # peer chaincode invoke -n demo -c '{"Args":["1abf", "notification 1ABF", "2019-06-12T12:54:02.000"], "Function":"createEvent"}' -C companychannel
 
 E em seguida consultar (_getEvent_):
 
-      $ peer chaincode query -n demo -c '{"Args":["1abf"], "Function":"getEvent"}' -C companychannel
+      # peer chaincode query -n demo -c '{"Args":["1abf"], "Function":"getEvent"}' -C companychannel
 
 ## Inspecionando o chaincode em Node.js em tempo de execução
 
