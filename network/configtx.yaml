@@ -7,14 +7,14 @@
 #
 ################################################################################
 Organizations:
-   
-    - &OrdererOrg        
+
+    - &OrdererOrg
         Name: OrdererOrg
         ID: OrdererMSP
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/company.com/msp
 
-    - &Provider        
+    - &Provider
         Name: ProviderMSP
         # ID to load the MSP definition as
         ID: ProviderMSP
@@ -26,7 +26,7 @@ Organizations:
             - Host: peer0.provider.company.com
               Port: 7051
 
-    - &Consumer        
+    - &Consumer
         Name: ConsumerMSP
         # ID to load the MSP definition as
         ID: ConsumerMSP
@@ -37,7 +37,7 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.consumer.company.com
               Port: 7051
-    
+
 ################################################################################
 #
 #   SECTION: Capabilities
@@ -57,14 +57,14 @@ Organizations:
 #   then the v1.0.x peer will deliberately crash.
 #
 ################################################################################
-Capabilities:    
-    Global: &ChannelCapabilities        
+Capabilities:
+    Global: &ChannelCapabilities
         V1_1: true
-    
-    Orderer: &OrdererCapabilities        
+
+    Orderer: &OrdererCapabilities
         V1_1: true
-    
-    Application: &ApplicationCapabilities        
+
+    Application: &ApplicationCapabilities
         V1_2: true
 
 ################################################################################
@@ -156,4 +156,4 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *Provider
-                - *Consumer            
+                - *Consumer

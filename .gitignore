@@ -3,3 +3,4 @@ chaincode/demo/package-lock.json
 network/crypto-config/*
 network/channel-artifacts/*
 bin/
+.vscode/

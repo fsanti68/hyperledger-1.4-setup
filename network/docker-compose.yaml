@@ -1,5 +1,3 @@
-#
-
 version: '2'
 
 volumes:
@@ -15,7 +13,7 @@ networks:
 services:
   orderer.company.com:
     container_name: orderer.company.com
-    image: hyperledger/fabric-orderer:latest
+    image: hyperledger/fabric-orderer:1.4.0
     environment:
       - FABRIC_LOGGING_SPEC=INFO
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -36,7 +34,7 @@ services:
     - ./crypto-config/ordererOrganizations/company.com/orderers/orderer.company.com/tls/:/var/hyperledger/orderer/tls
     - orderer.company.com:/var/hyperledger/production/orderer
     ports:
-      - 7050:7050    
+      - 7050:7050
     networks:
       - companyNetwork
 
@@ -121,7 +119,7 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.consumer.company.com:7051
       - CORE_PEER_LOCALMSPID=ConsumerMSP
     volumes:
-        - /var/run/:/host/var/run/        
+        - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/consumer.company.com/peers/peer1.consumer.company.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/consumer.company.com/peers/peer1.consumer.company.com/tls:/etc/hyperledger/fabric/tls
         - peer1.consumer.company.com:/var/hyperledger/production
@@ -135,7 +133,7 @@ services:
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:latest
+    image: hyperledger/fabric-tools:1.4.0
     tty: true
     stdin_open: true
     environment:
