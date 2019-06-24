@@ -9,10 +9,9 @@ echo "*                                                                *"
 echo "******************************************************************"
 
 usage() {
-   echo "Usage: $0 <chaincode name> <version>"
+   echo "Usage: $0 <chaincode name> <function name> <arguments>"
    echo "As seguintes variáveis de ambiente são requeridas:"
    echo "  - CHANNELID=<channel id>"
-   echo "  - ORDERER=<orderer.company.com:7050>"
    echo "  - PEERID=<peerid>"
    echo "  - COMPANYDOMAIN=<company.com>"
    echo "  - MSPID=<CompanyMSP>"
@@ -21,7 +20,6 @@ usage() {
 
 [[ $# -lt 2 ]] && usage
 [[ ! -v CHANNELID ]] && usage
-[[ ! -v ORDERER ]] && usage
 [[ ! -v PEERID ]] && usage
 [[ ! -v COMPANYDOMAIN ]] && usage
 [[ ! -v MSPID ]] && usage
@@ -29,7 +27,24 @@ usage() {
 CWD=$PWD
 cd network
 
-instantiate_chaincode="peer chaincode instantiate -o $ORDERER -C $CHANNELID -l node -n $1 -v $2 -c '{\"Args\":[]}'"
+chaincode=$1
+functionName=$2
+functionArgs='{"Function":"'$functionName'", "Args":['
+if [[ $# -gt 2 ]]; then
+   shift
+   shift
+   while test $# -gt 0
+   do
+      functionArgs=$functionArgs'"'$1'"',
+      shift
+   done
+   functionArgs=${functionArgs::-1}']}'
+else
+   functionArgs+=']}'
+fi
+
+instantiate_chaincode="peer chaincode query -n $chaincode -c '$functionArgs' -C $CHANNELID"
+echo $instantiate_chaincode
 
 export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/$COMPANYDOMAIN/users/Admin\@$COMPANYDOMAIN/msp/
 export CORE_PEER_ADDRESS=$PEERID.$COMPANYDOMAIN:7051

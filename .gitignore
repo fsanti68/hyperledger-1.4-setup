@@ -1,5 +1,5 @@
-chaincode/demo/node_modules
-chaincode/demo/package-lock.json
+chaincode/*/node_modules
+chaincode/*/package-lock.json
 network/crypto-config/*
 network/channel-artifacts/*
 bin/
